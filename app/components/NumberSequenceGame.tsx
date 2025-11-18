@@ -569,11 +569,11 @@ export default function NumberSequenceGame() {
             animation: jewelEffect 2s ease-in-out infinite;
           }
       `}</style>
-    <div className={`h-screen flex flex-col relative overflow-hidden ${gameStarted ? 'bg-gradient-to-br from-gray-50 via-white to-gray-50' : 'bg-gradient-to-br from-gray-800 via-gray-900 to-gray-950'}`}>
+    <div className={`min-h-screen flex flex-col relative overflow-x-hidden ${gameStarted ? 'bg-gradient-to-br from-gray-800 via-gray-900 to-gray-950' : 'bg-gradient-to-br from-gray-800 via-gray-900 to-gray-950'}`}>
 
 
       {/* Main Content */}
-      <div className="flex-1 flex items-center justify-center p-0.5 sm:p-1 md:p-2 transition-all duration-300 relative overflow-hidden min-h-0">
+      <div className="flex-1 flex items-center justify-center p-0.5 sm:p-1 md:p-2 transition-all duration-300 relative overflow-x-hidden overflow-y-auto min-h-0 w-full">
         {/* Transparent Background Overlay */}
         <div className="absolute inset-0 bg-white/10 backdrop-blur-md pointer-events-none rounded-2xl"></div>
       {/* Restart Game Button */}
@@ -636,8 +636,8 @@ export default function NumberSequenceGame() {
         </div>
       )}
 
-      <div className={`${gameStarted ? 'bg-white/20 backdrop-blur-md border border-white/30' : 'bg-gray-800/40 backdrop-blur-md border border-gray-700/30'} rounded-2xl shadow-2xl p-2 sm:p-4 md:p-6 max-w-7xl w-full mt-1 sm:mt-2`}>
-        <div className="text-center mb-1 sm:mb-2">
+      <div className={`${gameStarted ? 'bg-gray-800/80 backdrop-blur-md border border-gray-700/50' : 'bg-gray-800/40 backdrop-blur-md border border-gray-700/30'} rounded-2xl shadow-2xl p-2 sm:p-4 md:p-6 max-w-7xl w-full mt-1 sm:mt-2 mx-auto`}>
+        <div className="text-center mb-1 sm:mb-2 w-full">
      
           
           {!gameStarted && !showNFTRewardScreen ? (
@@ -803,16 +803,16 @@ export default function NumberSequenceGame() {
         {gameStarted && (
           <>
             {/* Glass Style Topbar */}
-            <div className="fixed top-0 left-0 right-0 z-40 bg-white border-b border-gray-200 shadow-sm">
+            <div className="fixed top-0 left-0 right-0 z-40 bg-gray-800 border-b border-gray-700 shadow-sm">
               <div className="w-full mx-auto px-2 sm:px-4 md:px-6 py-2 sm:py-3">
-                <div className="flex items-center justify-between relative">
-                  <div className="flex items-center gap-2 sm:gap-3 md:gap-4 flex-1 min-w-0">
-                    <div className="text-[10px] xs:text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 whitespace-nowrap">
-                      Score: <span className="font-bold text-blue-600 dark:text-blue-400">{score}</span>
+                <div className="flex items-center justify-between relative w-full">
+                  <div className="flex items-center gap-1.5 sm:gap-2 md:gap-3 lg:gap-4 flex-1 min-w-0">
+                    <div className="text-[10px] xs:text-xs sm:text-sm font-medium text-gray-300 whitespace-nowrap">
+                      Score: <span className="font-bold text-blue-400">{score}</span>
                     </div>
-                    <div className="h-3 sm:h-4 w-px bg-gray-300 dark:bg-gray-600 flex-shrink-0"></div>
-                    <div className="text-[10px] xs:text-xs sm:text-sm font-medium text-gray-700 dark:text-gray-300 whitespace-nowrap">
-                      Jewels: <span className="font-bold text-yellow-600 dark:text-yellow-400">{goldenJewels}/25</span>
+                    <div className="h-3 sm:h-4 w-px bg-gray-600 flex-shrink-0"></div>
+                    <div className="text-[10px] xs:text-xs sm:text-sm font-medium text-gray-300 whitespace-nowrap">
+                      Jewels: <span className="font-bold text-yellow-400">{goldenJewels}/25</span>
                     </div>
                   </div>
                   {/* Rules Button - Center */}
@@ -821,33 +821,154 @@ export default function NumberSequenceGame() {
                       setShowRules(true);
                       setTimerActive(false);
                     }}
-                    className="absolute left-1/2 transform -translate-x-1/2 px-2 sm:px-3 md:px-4 py-1 sm:py-1.5 md:py-2 bg-white border border-gray-300 rounded-lg text-[10px] xs:text-xs sm:text-sm font-medium text-gray-700 hover:bg-gray-50 active:bg-gray-100 transition-all duration-200 shadow-sm hover:shadow-md touch-manipulation"
+                    className="absolute left-1/2 transform -translate-x-1/2 px-2 sm:px-3 md:px-4 py-1 sm:py-1.5 md:py-2 bg-gray-700 border border-gray-600 rounded-lg text-[10px] xs:text-xs sm:text-sm font-medium text-gray-200 hover:bg-gray-600 active:bg-gray-500 transition-all duration-200 shadow-sm hover:shadow-md touch-manipulation whitespace-nowrap"
                   >
                     📋 Rules
                   </button>
-                  <div className="text-[10px] xs:text-xs sm:text-sm font-medium text-gray-600 dark:text-gray-400 flex-1 flex justify-end min-w-0">
+                  <div className="text-[10px] xs:text-xs sm:text-sm font-medium text-gray-400 flex-1 flex justify-end min-w-0">
                     <span className="whitespace-nowrap">{score}/25</span>
                   </div>
                 </div>
               </div>
             </div>
             {/* Game Content with Stats on Right */}
-            <div className="flex flex-col lg:flex-row gap-1 sm:gap-2 lg:gap-3 w-full max-w-[90rem] mx-auto pb-2 sm:pb-3 items-stretch px-1 sm:px-2 md:px-4 pt-10 sm:pt-12 md:pt-14 h-full overflow-hidden">
-              {/* Left Side Jewel Card - Hide on mobile, show on larger screens */}
+            <div className="flex flex-col lg:flex-row gap-2 sm:gap-3 lg:gap-4 w-full max-w-[90rem] mx-auto pb-2 sm:pb-3 items-center lg:items-stretch justify-center px-1 sm:px-2 md:px-4 pt-10 sm:pt-12 md:pt-14 min-h-0 overflow-hidden">
+              {/* Mobile Timer and Jewels Row - Above grid on mobile */}
+              {!gameWon && !gameFailed && (
+                <div className="flex md:hidden w-full max-w-sm mx-auto mb-3 order-1 flex-row items-center justify-center gap-3 px-2">
+                  {/* Mobile Timer */}
+                  <div className="relative w-16 h-16 flex-shrink-0">
+                    <svg className="transform -rotate-90 w-full h-full" viewBox="0 0 100 100">
+                      <defs>
+                        <linearGradient id="progressGradientMobile" x1="0%" y1="0%" x2="100%" y2="100%">
+                          {timeLeft <= 5 ? (
+                            <>
+                              <stop offset="0%" stopColor="#ef4444" />
+                              <stop offset="100%" stopColor="#dc2626" />
+                            </>
+                          ) : timeLeft <= 10 ? (
+                            <>
+                              <stop offset="0%" stopColor="#f97316" />
+                              <stop offset="100%" stopColor="#ea580c" />
+                            </>
+                          ) : (
+                            <>
+                              <stop offset="0%" stopColor="#22c55e" />
+                              <stop offset="100%" stopColor="#16a34a" />
+                            </>
+                          )}
+                        </linearGradient>
+                      </defs>
+                      <circle
+                        cx="50"
+                        cy="50"
+                        r="45"
+                        fill="none"
+                        stroke="currentColor"
+                        strokeWidth="8"
+                        className="text-gray-200 dark:text-gray-700"
+                      />
+                      <circle
+                        cx="50"
+                        cy="50"
+                        r="45"
+                        fill="none"
+                        strokeWidth="8"
+                        strokeLinecap="round"
+                        stroke="url(#progressGradientMobile)"
+                        className="transition-all duration-300"
+                        strokeDasharray={`${2 * Math.PI * 45}`}
+                        strokeDashoffset={`${2 * Math.PI * 45 * (1 - timeLeft / 20)}`}
+                      />
+                    </svg>
+                    <div className="absolute inset-0 flex items-center justify-center">
+                      <span className={`text-base font-bold ${
+                        timeLeft <= 5 
+                          ? 'text-red-500' 
+                          : timeLeft <= 10 
+                          ? 'text-orange-500'
+                          : 'text-green-500'
+                      }`}>
+                        {timeLeft}
+                      </span>
+                    </div>
+                  </div>
+                  
+                  {/* Mobile Jewels Panel */}
+                  <div className="bg-gray-700 rounded-lg shadow-lg p-2 border-2 border-gray-600 flex-1 max-w-[200px] overflow-hidden flex flex-col">
+                    <div className="text-center mb-1">
+                      <h3 className="text-xs font-bold text-gray-200 mb-0.5">💎 Jewels</h3>
+                      <div className="text-sm font-bold text-yellow-400">{goldenJewels}/25</div>
+                    </div>
+                    {/* Jewel Display Grid - Compact for mobile */}
+                    <div className="grid grid-cols-5 gap-1">
+                      {Array.from({ length: 25 }).map((_, index) => {
+                        const jewelType = jewelGridTypes[index] || '💎';
+                        const getJewelColor = (type: string): string => {
+                          const colorMap: { [key: string]: string } = {
+                            '💎': 'bg-gradient-to-br from-yellow-400 to-amber-500 shadow-yellow-400/50',
+                            '🔷': 'bg-gradient-to-br from-blue-400 to-indigo-500 shadow-blue-400/50',
+                            '💍': 'bg-gradient-to-br from-purple-400 to-pink-500 shadow-purple-400/50',
+                            '⭐': 'bg-gradient-to-br from-yellow-300 to-orange-400 shadow-yellow-300/50',
+                            '⭐️': 'bg-gradient-to-br from-yellow-300 to-orange-400 shadow-yellow-300/50',
+                            '💠': 'bg-gradient-to-br from-cyan-400 to-teal-500 shadow-cyan-400/50',
+                            '🔶': 'bg-gradient-to-br from-orange-400 to-red-500 shadow-orange-400/50',
+                            '💛': 'bg-gradient-to-br from-yellow-500 to-yellow-600 shadow-yellow-500/50',
+                            '🟡': 'bg-gradient-to-br from-yellow-300 to-yellow-400 shadow-yellow-300/50',
+                            '🔴': 'bg-gradient-to-br from-red-400 to-red-600 shadow-red-400/50',
+                            '🟢': 'bg-gradient-to-br from-green-400 to-green-600 shadow-green-400/50',
+                            '🔵': 'bg-gradient-to-br from-blue-400 to-blue-600 shadow-blue-400/50',
+                            '🟣': 'bg-gradient-to-br from-purple-400 to-purple-600 shadow-purple-400/50',
+                            '🟠': 'bg-gradient-to-br from-orange-400 to-orange-600 shadow-orange-400/50',
+                          };
+                          if (colorMap[type]) return colorMap[type];
+                          const colorPalette = [
+                            'bg-gradient-to-br from-yellow-400 to-amber-500 shadow-yellow-400/50',
+                            'bg-gradient-to-br from-blue-400 to-indigo-500 shadow-blue-400/50',
+                            'bg-gradient-to-br from-purple-400 to-pink-500 shadow-purple-400/50',
+                            'bg-gradient-to-br from-yellow-300 to-orange-400 shadow-yellow-300/50',
+                            'bg-gradient-to-br from-cyan-400 to-teal-500 shadow-cyan-400/50',
+                            'bg-gradient-to-br from-orange-400 to-red-500 shadow-orange-400/50',
+                            'bg-gradient-to-br from-red-400 to-red-600 shadow-red-400/50',
+                            'bg-gradient-to-br from-green-400 to-green-600 shadow-green-400/50',
+                          ];
+                          const hash = type.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+                          return colorPalette[hash % colorPalette.length];
+                        };
+                        const jewelColor = getJewelColor(jewelType);
+                        
+                        return (
+                          <div
+                            key={index}
+                            className={`aspect-square rounded flex items-center justify-center transition-all duration-300 min-w-[12px] min-h-[12px] ${
+                              index < goldenJewels
+                                ? `${jewelColor} shadow-sm`
+                                : 'bg-transparent border border-gray-300 dark:border-gray-600'
+                            }`}
+                          >
+                            {index < goldenJewels && (
+                              <span className="text-[10px] animate-jewelGlow">{jewelType}</span>
+                            )}
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </div>
+                </div>
+              )}
+              
+              {/* Desktop Left Side Jewel Card */}
               {!gameWon && !gameFailed && (
               <div className="hidden md:flex w-40 lg:w-48 flex-col gap-0.5 order-3 lg:order-0 lg:justify-start">
-                <div className="bg-white rounded-lg shadow-lg p-0.5 sm:p-1 border-2 border-gray-200 h-fit max-h-[200px] sm:max-h-[240px] overflow-y-auto flex flex-col">
-                  <div className="text-center mb-0.5 sticky top-0 bg-white pb-0.5 z-10 flex-shrink-0">
-                    <h3 className="text-[9px] font-bold text-gray-800 dark:text-gray-200 mb-0">💎 Jewels</h3>
-                    <div className="text-[10px] font-bold text-yellow-600 dark:text-yellow-500">{goldenJewels}/25</div>
+                <div className="bg-gray-700 rounded-lg shadow-lg p-0.5 sm:p-1 border-2 border-gray-600 h-fit max-h-[200px] sm:max-h-[240px] overflow-y-auto flex flex-col">
+                  <div className="text-center mb-0.5 sticky top-0 bg-gray-700 pb-0.5 z-10 flex-shrink-0">
+                    <h3 className="text-[9px] font-bold text-gray-200 mb-0">💎 Jewels</h3>
+                    <div className="text-[10px] font-bold text-yellow-400">{goldenJewels}/25</div>
                   </div>
                   {/* Jewel Display Grid */}
                   <div className="grid grid-cols-5 gap-0.5 mt-0.5">
                     {Array.from({ length: 25 }).map((_, index) => {
-                      // Use randomized jewel types
                       const jewelType = jewelGridTypes[index] || '💎';
-                      
-                      // Map jewel types to colors (with fallback colors for unmapped types)
                       const getJewelColor = (type: string): string => {
                         const colorMap: { [key: string]: string } = {
                           '💎': 'bg-gradient-to-br from-yellow-400 to-amber-500 shadow-yellow-400/50',
@@ -865,7 +986,6 @@ export default function NumberSequenceGame() {
                           '🟣': 'bg-gradient-to-br from-purple-400 to-purple-600 shadow-purple-400/50',
                           '🟠': 'bg-gradient-to-br from-orange-400 to-orange-600 shadow-orange-400/50',
                         };
-                        // Generate a color based on emoji character code if not in map
                         if (colorMap[type]) return colorMap[type];
                         const colorPalette = [
                           'bg-gradient-to-br from-yellow-400 to-amber-500 shadow-yellow-400/50',
@@ -898,7 +1018,7 @@ export default function NumberSequenceGame() {
                       );
                     })}
                   </div>
-                  <div className="text-[6px] text-center text-gray-500 mt-0.5 sticky bottom-0 bg-white pt-0.5 flex-shrink-0">
+                  <div className="text-[6px] text-center text-gray-400 mt-0.5 sticky bottom-0 bg-gray-700 pt-0.5 flex-shrink-0">
                     +1/-1
                   </div>
                 </div>
@@ -906,36 +1026,36 @@ export default function NumberSequenceGame() {
               )}
               
               {/* Main Game Area */}
-              <div className="flex-1 flex flex-col items-center justify-center order-2 lg:order-1 w-full pt-2 sm:pt-4 relative">
+              <div className="flex-1 flex flex-col items-center justify-center order-2 lg:order-1 w-full max-w-full pt-2 sm:pt-4 relative mx-auto px-1 sm:px-2">
             {gameWon ? (
-              <div className="w-full max-w-md mx-auto px-2 xs:px-3 sm:px-4">
-                <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-2 xs:p-2.5 sm:p-3 md:p-4">
+              <div className="w-full max-w-md mx-auto px-2 xs:px-3 sm:px-4 flex items-center justify-center">
+                <div className="bg-gray-700 rounded-xl shadow-lg border border-gray-600 p-2 xs:p-2.5 sm:p-3 md:p-4 w-full">
                   <div className="text-center py-1.5 xs:py-2 sm:py-2.5 md:py-3 px-1 xs:px-2">
                 <div className="text-xl xs:text-2xl sm:text-3xl mb-1 xs:mb-1.5">🎉</div>
-                <h2 className="text-base xs:text-lg sm:text-xl font-bold text-green-600 mb-1 xs:mb-1.5">
+                <h2 className="text-base xs:text-lg sm:text-xl font-bold text-green-400 mb-1 xs:mb-1.5">
                   Congratulations!
                 </h2>
-                <p className="text-xs xs:text-sm text-gray-600 mb-2 xs:mb-2.5 sm:mb-3">
+                <p className="text-xs xs:text-sm text-gray-300 mb-2 xs:mb-2.5 sm:mb-3">
                   You completed the sequence! Perfect memory!
                 </p>
                 <div className="mb-2 xs:mb-2.5 sm:mb-3">
-                  <div className="inline-block bg-white px-2 xs:px-2.5 sm:px-3 md:px-4 py-1.5 xs:py-2 rounded-lg border border-gray-200 shadow-md max-w-full w-full">
+                  <div className="inline-block bg-gray-800 px-2 xs:px-2.5 sm:px-3 md:px-4 py-1.5 xs:py-2 rounded-lg border border-gray-600 shadow-md max-w-full w-full">
                     {/* Stats Grid */}
                     <div className="grid grid-cols-2 gap-1.5 xs:gap-2 mb-2 xs:mb-2.5 sm:mb-3">
-                      <div className="bg-blue-50 rounded-lg p-1.5 xs:p-2 border border-blue-200">
-                        <div className="text-[9px] xs:text-[10px] text-blue-600 mb-0.5">Score</div>
-                        <div className="text-sm xs:text-base font-bold text-blue-700">{score}</div>
+                      <div className="bg-blue-900/50 rounded-lg p-1.5 xs:p-2 border border-blue-700">
+                        <div className="text-[9px] xs:text-[10px] text-blue-300 mb-0.5">Score</div>
+                        <div className="text-sm xs:text-base font-bold text-blue-400">{score}</div>
                       </div>
-                      <div className="bg-red-50 rounded-lg p-1.5 xs:p-2 border border-red-200">
-                        <div className="text-[9px] xs:text-[10px] text-red-600 mb-0.5">Wrong Selects</div>
-                        <div className="text-sm xs:text-base font-bold text-red-700">{wrongSelectCount}</div>
+                      <div className="bg-red-900/50 rounded-lg p-1.5 xs:p-2 border border-red-700">
+                        <div className="text-[9px] xs:text-[10px] text-red-300 mb-0.5">Wrong Selects</div>
+                        <div className="text-sm xs:text-base font-bold text-red-400">{wrongSelectCount}</div>
                       </div>
                     </div>
                     <div className="text-lg xs:text-xl mb-0.5 xs:mb-1">💎</div>
-                    <div className="text-sm xs:text-base sm:text-lg font-bold text-yellow-600 mb-0.5 xs:mb-1">
+                    <div className="text-sm xs:text-base sm:text-lg font-bold text-yellow-400 mb-0.5 xs:mb-1">
                       {goldenJewels} Jewels Collected
                     </div>
-                    <div className="text-[9px] xs:text-[10px] text-yellow-700 mb-1.5 xs:mb-2">
+                    <div className="text-[9px] xs:text-[10px] text-yellow-300 mb-1.5 xs:mb-2">
                       Out of 25 total
                     </div>
                     {/* Collected Jewels Grid */}
@@ -991,34 +1111,34 @@ export default function NumberSequenceGame() {
                 </div>
               </div>
             ) : gameFailed ? (
-              <div className="w-full max-w-md mx-auto px-2 xs:px-3 sm:px-4">
-                <div className="bg-white rounded-xl shadow-lg border border-gray-200 p-2 xs:p-2.5 sm:p-3 md:p-4">
+              <div className="w-full max-w-md mx-auto px-2 xs:px-3 sm:px-4 flex items-center justify-center">
+                <div className="bg-gray-700 rounded-xl shadow-lg border border-gray-600 p-2 xs:p-2.5 sm:p-3 md:p-4 w-full">
                   <div className="text-center py-1.5 xs:py-2 sm:py-2.5 md:py-3 px-1 xs:px-2">
                 <div className="text-xl xs:text-2xl sm:text-3xl mb-1 xs:mb-1.5">💥</div>
-                <h2 className="text-base xs:text-lg sm:text-xl font-bold text-red-600 mb-1 xs:mb-1.5">
+                <h2 className="text-base xs:text-lg sm:text-xl font-bold text-red-400 mb-1 xs:mb-1.5">
                   Game Over!
                 </h2>
-                <p className="text-xs xs:text-sm text-gray-600 mb-2 xs:mb-2.5 sm:mb-3">
+                <p className="text-xs xs:text-sm text-gray-300 mb-2 xs:mb-2.5 sm:mb-3">
                   {timeLeft === 0 ? 'Time ran out!' : 'You selected the wrong number.'}
                 </p>
                 <div className="mb-2 xs:mb-2.5 sm:mb-3">
-                  <div className="inline-block bg-white px-2 xs:px-2.5 sm:px-3 md:px-4 py-1.5 xs:py-2 rounded-lg border border-gray-200 shadow-md max-w-full w-full">
+                  <div className="inline-block bg-gray-800 px-2 xs:px-2.5 sm:px-3 md:px-4 py-1.5 xs:py-2 rounded-lg border border-gray-600 shadow-md max-w-full w-full">
                     {/* Stats Grid */}
                     <div className="grid grid-cols-2 gap-1.5 xs:gap-2 mb-2 xs:mb-2.5 sm:mb-3">
-                      <div className="bg-blue-50 rounded-lg p-1.5 xs:p-2 border border-blue-200">
-                        <div className="text-[9px] xs:text-[10px] text-blue-600 mb-0.5">Score</div>
-                        <div className="text-sm xs:text-base font-bold text-blue-700">{score}</div>
+                      <div className="bg-blue-900/50 rounded-lg p-1.5 xs:p-2 border border-blue-700">
+                        <div className="text-[9px] xs:text-[10px] text-blue-300 mb-0.5">Score</div>
+                        <div className="text-sm xs:text-base font-bold text-blue-400">{score}</div>
                       </div>
-                      <div className="bg-red-50 rounded-lg p-1.5 xs:p-2 border border-red-200">
-                        <div className="text-[9px] xs:text-[10px] text-red-600 mb-0.5">Wrong Selects</div>
-                        <div className="text-sm xs:text-base font-bold text-red-700">{wrongSelectCount}</div>
+                      <div className="bg-red-900/50 rounded-lg p-1.5 xs:p-2 border border-red-700">
+                        <div className="text-[9px] xs:text-[10px] text-red-300 mb-0.5">Wrong Selects</div>
+                        <div className="text-sm xs:text-base font-bold text-red-400">{wrongSelectCount}</div>
                       </div>
                     </div>
                     <div className="text-lg xs:text-xl mb-0.5 xs:mb-1">💎</div>
-                    <div className="text-sm xs:text-base sm:text-lg font-bold text-yellow-600 mb-0.5 xs:mb-1">
+                    <div className="text-sm xs:text-base sm:text-lg font-bold text-yellow-400 mb-0.5 xs:mb-1">
                       {goldenJewels} Jewels Collected
                     </div>
-                    <div className="text-[9px] xs:text-[10px] text-yellow-700 mb-1.5 xs:mb-2">
+                    <div className="text-[9px] xs:text-[10px] text-yellow-300 mb-1.5 xs:mb-2">
                       Out of 25 total
                     </div>
                     {/* Collected Jewels Grid */}
@@ -1074,10 +1194,10 @@ export default function NumberSequenceGame() {
                 </div>
               </div>
             ) : !gameWon && !gameFailed ? (
-              <div className="flex flex-col items-center justify-center w-full space-y-2 sm:space-y-3 md:space-y-4 lg:space-y-6 py-1 px-1 sm:px-2 md:px-4">
+              <div className="flex flex-col items-center justify-center w-full space-y-2 sm:space-y-3 md:space-y-4 lg:space-y-6 py-1 px-1 sm:px-2 md:px-4 mx-auto max-w-full">
                 {/* Number Grid */}
-                <div className="flex justify-center w-full max-w-full overflow-x-auto pb-2 -mx-1 sm:mx-0">
-                  <div className={`grid grid-cols-5 gap-1 xs:gap-1.5 sm:gap-2 md:gap-2.5 w-fit transition-all duration-300 px-1 sm:px-2 md:px-0 ${
+                <div className="flex justify-center items-center w-full max-w-full overflow-x-auto pb-2 mx-auto px-2 sm:px-0">
+                  <div className={`grid grid-cols-5 gap-1.5 xs:gap-2 sm:gap-2.5 md:gap-3 w-fit transition-all duration-300 ${
                     showRedBackground ? 'bg-red-500 bg-opacity-20 p-2 sm:p-4 rounded-lg' : ''
                   }`}>
                   {gridNumbers.map((number, index) => {
@@ -1095,21 +1215,21 @@ export default function NumberSequenceGame() {
                         disabled={!isClickable}
                         className={`
                           aspect-square flex items-center justify-center text-xs sm:text-sm md:text-base font-bold rounded sm:rounded-md md:rounded-lg transition-all duration-300 transform 
-                          min-w-[38px] min-h-[38px] xs:min-w-[42px] xs:min-h-[42px] sm:min-w-[46px] sm:min-h-[46px] md:min-w-[50px] md:min-h-[50px] lg:min-w-[54px] lg:min-h-[54px]
-                          w-full max-w-[60px] border border-gray-400 active:scale-95 hover:shadow-lg touch-manipulation
+                          min-w-[48px] min-h-[48px] xs:min-w-[50px] xs:min-h-[50px] sm:min-w-[52px] sm:min-h-[52px] md:min-w-[56px] md:min-h-[56px] lg:min-w-[60px] lg:min-h-[60px]
+                          w-full max-w-[62px] border-2 border-gray-600 active:scale-95 hover:shadow-lg touch-manipulation mx-auto
                           ${isWrongClicked
-                            ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white'
+                            ? 'bg-gradient-to-r from-purple-500 to-pink-500 text-white border-gray-600'
                             : isSelected
-                            ? 'bg-gradient-to-r from-green-500 to-emerald-500 text-white hover:scale-110 hover:rotate-3 cursor-pointer shadow-lg'
+                            ? 'bg-gradient-to-r from-green-500 to-emerald-500 text-white hover:scale-110 hover:rotate-3 cursor-pointer shadow-lg border-gray-600'
                             : isCurrent
-                            ? 'bg-gradient-to-r from-green-500 to-emerald-500 text-white hover:scale-110 cursor-pointer shadow-lg'
+                            ? 'bg-gradient-to-r from-green-500 to-emerald-500 text-white hover:scale-110 cursor-pointer shadow-lg border-gray-600'
                             : isPrevious
-                            ? 'bg-gradient-to-r from-gray-300 to-gray-400 dark:from-gray-600 dark:to-gray-700 text-gray-600 dark:text-gray-300 hover:scale-105 cursor-pointer'
-                            : 'bg-gradient-to-r from-white to-gray-100 dark:from-gray-800 dark:to-gray-700 border-2 border-gray-400 cursor-not-allowed'
+                            ? 'bg-gray-700 text-gray-300 hover:scale-105 cursor-pointer border-gray-600'
+                            : 'bg-gray-800 border-gray-600 cursor-not-allowed'
                           }
                           ${!isClickable ? 'cursor-not-allowed' : 'cursor-pointer hover:shadow-md'}
                           ${blinkingNumber === number ? 'animate-numberBlink' : ''}
-                          ${highlightedNumbers.includes(number) ? 'ring-4 ring-red-400 bg-red-100 dark:bg-red-900/30 animate-pulse' : ''}
+                          ${highlightedNumbers.includes(number) ? 'ring-4 ring-red-500 bg-red-900/40 animate-pulse border-gray-600' : ''}
                         `}
                       >
                         {shouldShowNumber ? (
@@ -1126,7 +1246,8 @@ export default function NumberSequenceGame() {
             ) : null}
               </div>
 
-              {/* Right Side Circular Progress Indicator */}
+
+              {/* Right Side Circular Progress Indicator - Desktop */}
               {!gameWon && !gameFailed && (
                 <div className="hidden md:flex w-20 lg:w-24 flex-col items-center justify-center order-3 lg:order-2">
                   <div className="relative w-16 h-16 sm:w-20 sm:h-20 lg:w-24 lg:h-24">
@@ -1201,13 +1322,13 @@ export default function NumberSequenceGame() {
 
       {/* Google Ad Bar - Page Bottom - Only show during active gameplay, hidden on front page and game over */}
       {gameStarted && !gameWon && !gameFailed ? (
-        <div className="w-full bg-white border-t border-gray-200 shadow-lg mt-auto flex-shrink-0">
+        <div className="w-full bg-gray-800 border-t border-gray-700 shadow-lg mt-auto flex-shrink-0 mx-auto">
           <div className="w-full max-w-[90rem] mx-auto px-1 sm:px-2 md:px-4 py-1 sm:py-1.5 md:py-2">
-            <div className="text-center">
-              <p className="text-[8px] xs:text-[9px] text-gray-500 mb-0.5 sm:mb-1">Advertisement</p>
-              <div className="border border-gray-200 rounded-lg p-0.5 sm:p-1 bg-gray-50 w-full overflow-hidden">
+            <div className="text-center w-full">
+              <p className="text-[8px] xs:text-[9px] text-gray-400 mb-0.5 sm:mb-1">Advertisement</p>
+              <div className="border border-gray-600 rounded-lg p-0.5 sm:p-1 bg-gray-700 w-full overflow-hidden mx-auto">
                 <GoogleAdsense
-                  adSlot="YOUR_AD_SLOT_ID"
+                  adSlot="2147719014"
                   adFormat="horizontal"
                   className="w-full"
                   responsive={true}

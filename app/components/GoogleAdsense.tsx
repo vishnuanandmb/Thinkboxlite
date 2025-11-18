@@ -43,7 +43,7 @@ export default function GoogleAdsense({
           minHeight: '100px',
           ...style,
         }}
-        data-ad-client="ca-pub-YOUR_PUBLISHER_ID"
+        data-ad-client="ca-pub-1452361813515835"
         data-ad-slot={adSlot}
         data-ad-format={adFormat}
         data-full-width-responsive={responsive ? 'true' : 'false'}

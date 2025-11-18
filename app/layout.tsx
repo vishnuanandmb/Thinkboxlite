@@ -28,12 +28,12 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Script
-          async
-          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-YOUR_PUBLISHER_ID"
-          strategy="afterInteractive"
-          crossOrigin="anonymous"
-        />
+      <Script
+              async
+              src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1452361813515835`}
+              strategy="afterInteractive"
+              crossOrigin="anonymous"
+            />
         {children}
       </body>
     </html>
